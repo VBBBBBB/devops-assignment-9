@@ -1,0 +1,12 @@
+The {{ .Chart.Name }} chart (release: {{ .Release.Name }}) has been deployed.
+
+Replicas running: {{ .Values.replicaCount }}
+Image:            {{ .Values.image.repository }}:{{ .Values.image.tag }}
+Service type:     {{ .Values.service.type }}
+
+Verify the deployment:
+  kubectl get deploy,svc,pods -l app.kubernetes.io/instance={{ .Release.Name }}
+
+Access the application locally:
+  kubectl port-forward svc/{{ include "student-webapp.fullname" . }} 8080:{{ .Values.service.port }}
+  # then open http://localhost:8080
